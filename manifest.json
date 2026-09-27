@@ -1,0 +1,10 @@
+{
+  "id": "callout-quick",
+  "name": "Callout Quick",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "选中文字后按快捷键，弹出选择框，一键把选中内容包成 [!important]、[!note]、[!tip] 等 Callout。类型列表可自定义。",
+  "author": "zych2023",
+  "authorUrl": "https://github.com/zych2023",
+  "isDesktopOnly": false
+}
