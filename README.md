@@ -128,6 +128,8 @@ No pre-configuration needed. To make it a permanent entry in the palette, add a 
 
 **Settings → Community plugins → Callout Quick** (gear icon).
 
+**Interface language** — the first setting on the page. Choose **Follow Obsidian**, **中文**, or **English**. It controls the settings page, the command names, the type palette, and every message. The change takes effect immediately, with no reload.
+
 **Callout type list** — one entry per line, defines what the palette offers:
 
 ```

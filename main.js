@@ -65,6 +65,37 @@ const BUILTIN_LABELS = {
 	cite: '引用',
 };
 
+/** 内置英文显示名，键与上面完全一致 */
+const LABELS_EN = {
+	note: 'Note',
+	abstract: 'Abstract',
+	summary: 'Summary',
+	tldr: 'Summary',
+	info: 'Info',
+	todo: 'Todo',
+	tip: 'Tip',
+	hint: 'Tip',
+	important: 'Important',
+	success: 'Success',
+	check: 'Success',
+	done: 'Success',
+	question: 'Question',
+	help: 'Question',
+	faq: 'Question',
+	warning: 'Warning',
+	caution: 'Warning',
+	attention: 'Warning',
+	failure: 'Failure',
+	fail: 'Failure',
+	missing: 'Missing',
+	danger: 'Danger',
+	error: 'Error',
+	bug: 'Bug',
+	example: 'Example',
+	quote: 'Quote',
+	cite: 'Quote',
+};
+
 /** 跟随 Obsidian 内置主题色，只用于选择框里的小圆点 */
 const TYPE_COLORS = {
 	note: '#086ddd',
@@ -83,7 +114,138 @@ const TYPE_COLORS = {
 	quote: '#9e9e9e',
 };
 
+/* ================================================================
+ * 文案（界面语言）
+ * ================================================================ */
+
+const STRINGS = {
+	zh: {
+		// 设置页
+		settingsTitle: 'Callout Quick 设置',
+
+		languageName: '界面语言',
+		languageDesc: '切换插件界面、命令名称与提示文字的语言。「跟随 Obsidian」会自动使用 Obsidian 的界面语言。',
+		languageAuto: '跟随 Obsidian',
+		languageZh: '中文',
+		languageEn: 'English',
+
+		typesName: 'Callout 类型列表',
+		typesDesc:
+			'每行一个，格式为「type」或「type | 显示名」。这份列表就是按快捷键后弹出的候选。支持任意自定义类型（如 mnemonic、idea）。',
+		typesPlaceholder: 'important\nnote | 笔记\ntip | 提示',
+
+		foldName: '默认折叠状态',
+		foldDesc: '生成的 Callout 是否带折叠标记。',
+		foldNone: '不折叠  [!type]',
+		foldCollapsed: '默认折叠  [!type]-',
+		foldExpanded: '默认展开  [!type]+',
+
+		titleName: '写入标题',
+		titleDesc:
+			'开启后把显示名写进标题，例如「> [!important] 重要」。关闭时用 Obsidian 自带的默认标题。',
+
+		tipsHotkeyTitle: '怎么绑定快捷键？',
+		tipsHotkeyBody:
+			'设置 → 快捷键 → 搜索「Callout Quick」→ 给「转换选中内容为 Callout」点 + 号，按下你想要的组合键即可。',
+		tipsUsageTitle: '用法要点：',
+		tip1: '· 选中文字后按快捷键 → 弹框选类型 → 回车。',
+		tip2: '· 不选中任何东西时按快捷键，会插入一个空的 Callout 模板。',
+		tip3: '· 光标停在已有 Callout 里按快捷键，可以直接换类型或移除格式。',
+
+		// 命令名
+		cmdConvert: '转换选中内容为 Callout（弹出类型选择）',
+		cmdLastUsed: '转换选中内容为上次使用的 Callout',
+		cmdRemove: '移除选中内容的 Callout 格式',
+
+		// 提示
+		noticeSwitched: (type) => '已切换为 [!' + type + ']',
+		noticeInserted: (type) => '已插入 [!' + type + ']',
+		noticeApplied: (type) => '已应用 [!' + type + ']',
+		noticeRemoved: '已移除 Callout 格式',
+		noticeNoHistory: '还没有使用记录，请先用「转换选中内容为 Callout」选一次类型',
+		noticeNotCallout: '选中的内容不是 Callout',
+
+		// 选择框
+		modalPlaceholder: '选择 Callout 类型（可直接输入自定义类型）…',
+		modalEmpty: '没有匹配的类型',
+		lastUsed: '上次',
+		custom: '自定义类型',
+		removeItem: '移除 Callout 格式',
+	},
+
+	en: {
+		settingsTitle: 'Callout Quick settings',
+
+		languageName: 'Interface language',
+		languageDesc:
+			'Language used by the plugin settings, command names, and messages. "Follow Obsidian" uses the app language.',
+		languageAuto: 'Follow Obsidian',
+		languageZh: '中文',
+		languageEn: 'English',
+
+		typesName: 'Callout types',
+		typesDesc:
+			'One entry per line, either "type" or "type | Label". This list is what the hotkey palette offers. Any custom type is supported, for example mnemonic or idea.',
+		typesPlaceholder: 'important\nnote | Note\ntip | Tip',
+
+		foldName: 'Default fold state',
+		foldDesc: 'Whether generated callouts carry a fold marker.',
+		foldNone: 'Not folded  [!type]',
+		foldCollapsed: 'Collapsed  [!type]-',
+		foldExpanded: 'Expanded  [!type]+',
+
+		titleName: 'Write title into header',
+		titleDesc:
+			'When enabled, the display label is written into the header, for example "> [!important] Important". When disabled, Obsidian\'s default title is used.',
+
+		tipsHotkeyTitle: 'How to bind a hotkey',
+		tipsHotkeyBody:
+			'Settings → Hotkeys → search for "Callout Quick" → click + next to "Convert selection to callout" → press the key combination you want.',
+		tipsUsageTitle: 'Usage at a glance',
+		tip1: '· Select text, press the hotkey, pick a type, press Enter.',
+		tip2: '· Press the hotkey with nothing selected to insert an empty callout template.',
+		tip3: '· With the cursor inside an existing callout, press the hotkey to change its type or remove the formatting.',
+
+		cmdConvert: 'Convert selection to callout (pick a type)',
+		cmdLastUsed: 'Convert selection to last used callout',
+		cmdRemove: 'Remove callout formatting from selection',
+
+		noticeSwitched: (type) => 'Switched to [!' + type + ']',
+		noticeInserted: (type) => 'Inserted [!' + type + ']',
+		noticeApplied: (type) => 'Applied [!' + type + ']',
+		noticeRemoved: 'Callout formatting removed',
+		noticeNoHistory: 'No history yet. Use "Convert selection to callout" once to pick a type.',
+		noticeNotCallout: 'The selection is not a callout',
+
+		modalPlaceholder: 'Pick a callout type (or type a custom one)…',
+		modalEmpty: 'No matching type',
+		lastUsed: 'Last used',
+		custom: 'Custom type',
+		removeItem: 'Remove callout formatting',
+	},
+};
+
+/** 读取 Obsidian 当前界面语言，取不到时退回英文 */
+function detectLang() {
+	try {
+		const locale =
+			(window.moment && window.moment.locale && window.moment.locale()) ||
+			navigator.language ||
+			'en';
+		return /^zh/i.test(String(locale)) ? 'zh' : 'en';
+	} catch (e) {
+		return 'en';
+	}
+}
+
+/** 把设置里的 language 解析成实际生效的 'zh' 或 'en' */
+function resolveLang(value) {
+	if (value === 'zh' || value === 'en') return value;
+	return detectLang();
+}
+
 const DEFAULT_SETTINGS = {
+	language: 'auto', // auto | zh | en
 	callouts: DEFAULT_TYPES.join('\n'),
 	foldMode: 'none', // none | collapsed | expanded
 	addTitle: false,
@@ -99,9 +261,10 @@ function colorOf(type) {
 }
 
 /** 把设置里的多行文本解析成 [{type,label,color}] */
-function parseCalloutConfig(text) {
+function parseCalloutConfig(text, lang) {
 	const list = [];
 	const seen = new Set();
+	const builtin = lang === 'en' ? LABELS_EN : BUILTIN_LABELS;
 
 	const push = (rawType, rawLabel) => {
 		const type = String(rawType || '')
@@ -110,7 +273,7 @@ function parseCalloutConfig(text) {
 			.replace(/[^a-z0-9_-]/g, '');
 		if (!type || seen.has(type)) return;
 		seen.add(type);
-		const label = (rawLabel || '').trim() || BUILTIN_LABELS[type] || type;
+		const label = (rawLabel || '').trim() || builtin[type] || type;
 		list.push({ type, label, color: colorOf(type) });
 	};
 
@@ -182,7 +345,7 @@ function foldCharOf(foldMode) {
  * - 选区已是 Callout：只替换类型标记（不嵌套）
  * - 选区为空：插入一个空模板，光标落在内容行
  */
-function applyCallout(editor, range, def, settings) {
+function applyCallout(editor, range, def, settings, t) {
 	const { from, to } = range;
 	const selected = editor.getRange(from, to);
 	const foldChar = foldCharOf(settings.foldMode);
@@ -204,7 +367,7 @@ function applyCallout(editor, range, def, settings) {
 			break;
 		}
 		editor.replaceRange(lines.join('\n'), from, to);
-		new Notice('已切换为 [!' + def.type + ']');
+		new Notice(t.noticeSwitched(def.type));
 		return;
 	}
 
@@ -225,7 +388,7 @@ function applyCallout(editor, range, def, settings) {
 
 		const contentLine = anchor.line + (prefix ? 2 : 1);
 		editor.setCursor({ line: contentLine, ch: 2 });
-		new Notice('已插入 [!' + def.type + ']');
+		new Notice(t.noticeInserted(def.type));
 		return;
 	}
 
@@ -258,7 +421,7 @@ function applyCallout(editor, range, def, settings) {
 	}
 
 	editor.replaceRange(prefix + payload + suffix, start, to);
-	new Notice('已应用 [!' + def.type + ']');
+	new Notice(t.noticeApplied(def.type));
 }
 
 /** 去掉 Callout 的 > [!xxx] 头和每行的 "> " 前缀 */
@@ -284,12 +447,13 @@ function removeCalloutFormat(editor, range) {
  * ================================================================ */
 
 class CalloutSuggestModal extends SuggestModal {
-	constructor(app, items, onChoose) {
+	constructor(app, items, onChoose, t) {
 		super(app);
 		this.items = items;
 		this.onChoose = onChoose;
-		this.setPlaceholder('选择 Callout 类型（可直接输入自定义类型）…');
-		this.emptyStateText = '没有匹配的类型';
+		this.t = t;
+		this.setPlaceholder(t.modalPlaceholder);
+		this.emptyStateText = t.modalEmpty;
 	}
 
 	getSuggestions(query) {
@@ -305,7 +469,7 @@ class CalloutSuggestModal extends SuggestModal {
 		// 允许现场造一个非标准类型
 		const clean = q.replace(/[^a-z0-9_-]/g, '');
 		if (clean && !this.items.some((it) => it.type === clean)) {
-			hits.push({ type: clean, label: '自定义类型', color: '#8a8a8a', custom: true });
+			hits.push({ type: clean, label: this.t.custom, color: '#8a8a8a', custom: true });
 		}
 		return hits;
 	}
@@ -328,7 +492,7 @@ class CalloutSuggestModal extends SuggestModal {
 			el.createSpan({ cls: 'callout-quick-label', text: item.label });
 		}
 		if (item.lastUsed) {
-			el.createSpan({ cls: 'callout-quick-badge', text: '上次' });
+			el.createSpan({ cls: 'callout-quick-badge', text: this.t.lastUsed });
 		}
 	}
 
@@ -349,17 +513,35 @@ class CalloutQuickSettingTab extends PluginSettingTab {
 
 	display() {
 		const { containerEl } = this;
+		const t = this.plugin.t;
 		containerEl.empty();
-		containerEl.createEl('h2', { text: 'Callout Quick 设置' });
+		containerEl.createEl('h2', { text: t.settingsTitle });
+
+		// ── 第一栏：界面语言 ──────────────────────────────────
+		new Setting(containerEl)
+			.setName(t.languageName)
+			.setDesc(t.languageDesc)
+			.addDropdown((dd) =>
+				dd
+					.addOption('auto', t.languageAuto)
+					.addOption('zh', t.languageZh)
+					.addOption('en', t.languageEn)
+					.setValue(this.plugin.settings.language)
+					.onChange(async (v) => {
+						this.plugin.settings.language = v;
+						await this.plugin.saveSettings();
+						// 命令名也跟着变，立即重绘整个设置页
+						this.plugin.refreshCommandNames();
+						this.display();
+					})
+			);
 
 		new Setting(containerEl)
-			.setName('Callout 类型列表')
-			.setDesc(
-				'每行一个，格式为「type」或「type | 显示名」。这份列表就是按快捷键后弹出的候选。支持任意自定义类型（如 mnemonic、idea）。'
-			)
+			.setName(t.typesName)
+			.setDesc(t.typesDesc)
 			.addTextArea((ta) => {
 				ta.setValue(this.plugin.settings.callouts)
-					.setPlaceholder('important\nnote | 笔记\ntip | 提示')
+					.setPlaceholder(t.typesPlaceholder)
 					.onChange(async (v) => {
 						this.plugin.settings.callouts = v;
 						await this.plugin.saveSettings();
@@ -369,13 +551,13 @@ class CalloutQuickSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('默认折叠状态')
-			.setDesc('生成的 Callout 是否带折叠标记。')
+			.setName(t.foldName)
+			.setDesc(t.foldDesc)
 			.addDropdown((dd) =>
 				dd
-					.addOption('none', '不折叠  [!type]')
-					.addOption('collapsed', '默认折叠  [!type]-')
-					.addOption('expanded', '默认展开  [!type]+')
+					.addOption('none', t.foldNone)
+					.addOption('collapsed', t.foldCollapsed)
+					.addOption('expanded', t.foldExpanded)
 					.setValue(this.plugin.settings.foldMode)
 					.onChange(async (v) => {
 						this.plugin.settings.foldMode = v;
@@ -384,8 +566,8 @@ class CalloutQuickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('写入标题')
-			.setDesc('开启后把显示名写进标题，例如「> [!important] 重要」。关闭时用 Obsidian 自带的默认标题。')
+			.setName(t.titleName)
+			.setDesc(t.titleDesc)
 			.addToggle((tg) =>
 				tg.setValue(this.plugin.settings.addTitle).onChange(async (v) => {
 					this.plugin.settings.addTitle = v;
@@ -394,14 +576,12 @@ class CalloutQuickSettingTab extends PluginSettingTab {
 			);
 
 		const tips = containerEl.createDiv({ cls: 'callout-quick-tips' });
-		tips.createEl('p', { text: '怎么绑定快捷键？' });
-		tips.createEl('p', {
-			text: '设置 → 快捷键 → 搜索「Callout Quick」→ 给「转换选中内容为 Callout」点 + 号，按下你想要的组合键即可。',
-		});
-		tips.createEl('p', { text: '用法要点：' });
-		tips.createEl('p', { text: '· 选中文字后按快捷键 → 弹框选类型 → 回车。' });
-		tips.createEl('p', { text: '· 不选中任何东西时按快捷键，会插入一个空的 Callout 模板。' });
-		tips.createEl('p', { text: '· 光标停在已有 Callout 里按快捷键，可以直接换类型或移除格式。' });
+		tips.createEl('p', { text: t.tipsHotkeyTitle });
+		tips.createEl('p', { text: t.tipsHotkeyBody });
+		tips.createEl('p', { text: t.tipsUsageTitle });
+		tips.createEl('p', { text: t.tip1 });
+		tips.createEl('p', { text: t.tip2 });
+		tips.createEl('p', { text: t.tip3 });
 	}
 }
 
@@ -414,23 +594,34 @@ class CalloutQuickPlugin extends Plugin {
 		await this.loadSettings();
 		this.addSettingTab(new CalloutQuickSettingTab(this.app, this));
 
-		this.addCommand({
-			id: 'convert-selection',
-			name: '转换选中内容为 Callout（弹出类型选择）',
-			editorCallback: (editor) => this.convert(editor),
-		});
+		const t = this.t;
 
-		this.addCommand({
-			id: 'convert-selection-last-used',
-			name: '转换选中内容为上次使用的 Callout',
-			editorCallback: (editor) => this.convertLastUsed(editor),
-		});
+		this.commandRefs = {
+			convert: this.addCommand({
+				id: 'convert-selection',
+				name: t.cmdConvert,
+				editorCallback: (editor) => this.convert(editor),
+			}),
+			lastUsed: this.addCommand({
+				id: 'convert-selection-last-used',
+				name: t.cmdLastUsed,
+				editorCallback: (editor) => this.convertLastUsed(editor),
+			}),
+			remove: this.addCommand({
+				id: 'remove-callout',
+				name: t.cmdRemove,
+				editorCallback: (editor) => this.removeCallout(editor),
+			}),
+		};
+	}
 
-		this.addCommand({
-			id: 'remove-callout',
-			name: '移除选中内容的 Callout 格式',
-			editorCallback: (editor) => this.removeCallout(editor),
-		});
+	/** 语言切换后同步命令名。addCommand 返回的就是命令对象，改 name 即可生效 */
+	refreshCommandNames() {
+		if (!this.commandRefs) return;
+		const t = this.t;
+		if (this.commandRefs.convert) this.commandRefs.convert.name = t.cmdConvert;
+		if (this.commandRefs.lastUsed) this.commandRefs.lastUsed.name = t.cmdLastUsed;
+		if (this.commandRefs.remove) this.commandRefs.remove.name = t.cmdRemove;
 	}
 
 	onunload() {}
@@ -443,12 +634,23 @@ class CalloutQuickPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
+	/** 当前生效语言：'zh' 或 'en' */
+	get lang() {
+		return resolveLang(this.settings.language);
+	}
+
+	/** 当前语言的文案表 */
+	get t() {
+		return STRINGS[this.lang];
+	}
+
 	get calloutDefs() {
-		return parseCalloutConfig(this.settings.callouts);
+		return parseCalloutConfig(this.settings.callouts, this.lang);
 	}
 
 	/** 主流程：弹框 → 应用 */
 	convert(editor) {
+		const t = this.t;
 		const range = expandToBlock(editor, editor.getCursor('from'), editor.getCursor('to'));
 		const selected = editor.getRange(range.from, range.to);
 		const existing = detectCallout(selected);
@@ -467,43 +669,51 @@ class CalloutQuickPlugin extends Plugin {
 
 		// 已经处于 Callout 中 → 额外提供「移除」
 		if (existing) {
-			items.push({ action: 'remove', label: '移除 Callout 格式', color: '#e93147' });
+			items.push({ action: 'remove', label: t.removeItem, color: '#e93147' });
 		}
 
-		new CalloutSuggestModal(this.app, items, (item) => {
-			if (item.action === 'remove') {
-				removeCalloutFormat(editor, range);
-				new Notice('已移除 Callout 格式');
-				return;
-			}
-			applyCallout(editor, range, item, this.settings);
-			this.settings.lastUsedType = item.type;
-			this.saveSettings();
-		}).open();
+		new CalloutSuggestModal(
+			this.app,
+			items,
+			(item) => {
+				if (item.action === 'remove') {
+					removeCalloutFormat(editor, range);
+					new Notice(t.noticeRemoved);
+					return;
+				}
+				applyCallout(editor, range, item, this.settings, t);
+				this.settings.lastUsedType = item.type;
+				this.saveSettings();
+			},
+			t
+		).open();
 	}
 
 	convertLastUsed(editor) {
+		const t = this.t;
 		const type = this.settings.lastUsedType;
 		if (!type) {
-			new Notice('还没有使用记录，请先用「转换选中内容为 Callout」选一次类型');
+			new Notice(t.noticeNoHistory);
 			return;
 		}
+		const builtin = this.lang === 'en' ? LABELS_EN : BUILTIN_LABELS;
 		const def =
 			this.calloutDefs.find((it) => it.type === type) ||
-			{ type, label: BUILTIN_LABELS[type] || type, color: colorOf(type) };
+			{ type, label: builtin[type] || type, color: colorOf(type) };
 		const range = expandToBlock(editor, editor.getCursor('from'), editor.getCursor('to'));
-		applyCallout(editor, range, def, this.settings);
+		applyCallout(editor, range, def, this.settings, t);
 	}
 
 	removeCallout(editor) {
+		const t = this.t;
 		const range = expandToBlock(editor, editor.getCursor('from'), editor.getCursor('to'));
 		const selected = editor.getRange(range.from, range.to);
 		if (!detectCallout(selected)) {
-			new Notice('选中的内容不是 Callout');
+			new Notice(t.noticeNotCallout);
 			return;
 		}
 		removeCalloutFormat(editor, range);
-		new Notice('已移除 Callout 格式');
+		new Notice(t.noticeRemoved);
 	}
 }
 
