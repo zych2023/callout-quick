@@ -1,7 +1,7 @@
 {
   "id": "callout-quick",
   "name": "Callout Quick",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minAppVersion": "1.4.0",
   "description": "Turn selected text into a callout with one hotkey: pick a type from a searchable palette, or type your own.",
   "author": "zych2023",
