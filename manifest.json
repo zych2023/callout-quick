@@ -3,7 +3,7 @@
   "name": "Callout Quick",
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
-  "description": "选中文字后按快捷键，弹出选择框，一键把选中内容包成 [!important]、[!note]、[!tip] 等 Callout。类型列表可自定义。",
+  "description": "Turn selected text into a callout with one hotkey: pick a type from a searchable palette, or type your own.",
   "author": "zych2023",
   "authorUrl": "https://github.com/zych2023",
   "isDesktopOnly": false

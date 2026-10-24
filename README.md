@@ -1,181 +1,188 @@
 # Callout Quick
 
-**让加 Callout 变成一次快捷键的事。**
+**Turning any text into a callout, one hotkey away.**
 
-不用手打 `> [!note]`、不用记 `>` 前缀、不用反复检查前后空行 —— 选中文字、按快捷键、在弹框里选类型（也可以直接敲类型名），回车就好。
+No more typing `> [!note]` by hand, no more remembering the `>` prefix on every line, no more fixing blank lines around the block. Select the text, press your hotkey, pick a type from the palette (or just type a type name), hit Enter.
 
-纯 CommonJS 实现，**不需要 Node、不需要编译**，三个文件复制进插件目录即可使用。
+Written in plain CommonJS. **No Node.js, no build step** — copy three files into your vault and it runs.
+
+English | [简体中文](README.zh.md)
 
 ---
 
-## 安装
+## Installation
 
-1. 找到你的库（Vault）根目录。不确定的话，在 Obsidian 里右键任意笔记 → 在系统中显示，往上退到最外层那个文件夹就是。
-2. 在里面创建文件夹 `.obsidian/plugins/callout-quick/`（Windows 资源管理器需要先勾选「查看 → 显示 → 隐藏的项目」才能看到 `.obsidian`）。
-3. 把本目录下的 `manifest.json`、`main.js`、`styles.css` 三个文件复制进去。
-4. 打开 Obsidian → 设置 → 第三方插件 → 关闭「安全模式」→ 在已安装插件列表里找到 **Callout Quick** 并打开开关。
-5. 如果没出现，点一下插件列表右上角的刷新按钮。
+### Manual installation
 
-最终结构：
+1. Locate your vault folder. If you are unsure, right-click any note in Obsidian → **Show in system explorer**, then walk up to the outermost folder — that is your vault root.
+2. Create the folder `.obsidian/plugins/callout-quick/` inside it. On Windows you need to enable **View → Show → Hidden items** before `.obsidian` becomes visible.
+3. Copy `manifest.json`, `main.js`, and `styles.css` from this repository into that folder.
+4. Open Obsidian → **Settings → Community plugins**, turn off **Restricted mode** if it is on, then find **Callout Quick** in the installed plugin list and toggle it on.
+5. If the plugin does not appear, click the refresh button at the top right of the plugin list.
+
+The resulting layout should be:
 
 ```
-<你的库>/.obsidian/plugins/callout-quick/
+<your vault>/.obsidian/plugins/callout-quick/
 ├── manifest.json
 ├── main.js
 └── styles.css
 ```
 
----
+### Installing from the community plugin directory
 
-## 绑定快捷键（关键一步）
-
-插件本身不预设快捷键，由你自己定：
-
-设置 → **快捷键** → 搜索 `Callout Quick` → 找到 **「转换选中内容为 Callout（弹出类型选择）」** → 点右边的 `+` → 按下你想要的组合键。
-
-建议 `Ctrl/Cmd + Shift + C`，和 Obsidian 其他快捷键不冲突。
+Once Callout Quick is listed in the directory, install it from **Settings → Community plugins → Browse** and search for "Callout Quick". Until then, use the manual steps above.
 
 ---
 
-## 用法
+## Setting up a hotkey (required)
 
-### 1. 把选中文字变成 Callout
+The plugin ships without a default hotkey, so it never conflicts with yours:
 
-用鼠标选中一段文字，按快捷键，弹出一个搜索框，里面是各种类型：
+**Settings → Hotkeys** → search for `Callout Quick` → find **"Convert selection to callout (pick a type)"** → click the `+` on the right → press the key combination you want.
+
+`Ctrl/Cmd + Shift + C` is a reasonable choice and does not collide with Obsidian's defaults.
+
+---
+
+## Usage
+
+### 1. Wrap the selected text in a callout
+
+Select some text with the mouse and press your hotkey. A searchable palette appears:
 
 ```
-● [!important]  重要
-● [!note]       笔记
-● [!tip]        提示
+● [!important]  Important
+● [!note]       Note
+● [!tip]        Tip
 ...
 ```
 
-输入几个字母就能筛选（输 `imp` 或 `重要` 都行），回车生效。**上次用过的类型会排在最前面**，并带一个「上次」标记。
+Type a few letters to filter (either `imp` or the display label works), then press Enter. **The type you used last is moved to the top** and marked as such.
 
-转换前：
+Before:
 
 ```markdown
-这里是需要重点记住的内容
+This is the part worth remembering
 ```
 
-转换后：
+After:
 
 ```markdown
 > [!important]
-> 这里是需要重点记住的内容
+> This is the part worth remembering
 ```
 
-多行选中也没问题，每行自动加 `> ` 前缀，原文档里的空行会变成 `>`：
+Multi-line selections work too — every line gets a `> ` prefix, and blank lines inside the selection become a bare `>`:
 
 ```markdown
 > [!note]
-> 第一行
-> 第二行
+> First line
+> Second line
 >
-> 第四行
+> Fourth line
 ```
 
-Callout 前后会自动补空行，避免和上下段落粘连（Markdown 的 lazy continuation 会把紧贴的段落吸进引用块里）。
+Blank lines are inserted before and after the callout automatically. This matters because Markdown's lazy continuation would otherwise pull adjacent paragraphs into the blockquote.
 
-### 2. 不选中任何东西
+### 2. Nothing selected
 
-直接按快捷键 → 插入一个空的 Callout 模板，光标落在内容行，接着打字就行：
+Press the hotkey with no selection and the plugin inserts an empty callout template, placing the cursor on the content line so you can start typing:
 
 ```markdown
 > [!note]
 > 
 ```
 
-### 3. 光标停在已有 Callout 里
+### 3. Cursor inside an existing callout
 
-不用手动选一整块，光标放进去按快捷键即可，插件会自动识别整个 Callout 块，然后你可以：
+You do not need to select the whole block — just put the cursor anywhere inside it and press the hotkey. The plugin detects the full callout block and lets you:
 
-- **换类型** —— 只替换 `[!xxx]` 标记，不会嵌套出一层引用
-- **移除格式** —— 列表末尾多出一个 `✕ 移除 Callout 格式`，选中后还原成普通段落
+- **Change the type** — only the `[!xxx]` marker is replaced, so you never end up with a nested blockquote.
+- **Remove the formatting** — an extra `✕ Remove callout formatting` entry appears at the end of the palette; choosing it restores a plain paragraph.
 
-### 4. 自定义类型
+### 4. Custom types
 
-选择框里直接输入一个不存在的类型名，会出现「自定义类型」选项，回车即可生成，比如输入 `idea`：
+Type a name that does not exist yet in the palette, and a "custom type" entry appears — press Enter to use it. For example, typing `idea` produces:
 
 ```markdown
 > [!idea]
-> 内容
+> content
 ```
 
-不用提前配置。想让它固定出现在候选列表里，去设置页加一行。
+No pre-configuration needed. To make it a permanent entry in the palette, add a line to the settings.
 
 ---
 
-## 三个命令
+## Commands
 
-| 命令 | 说明 |
+| Command | Description |
 | --- | --- |
-| 转换选中内容为 Callout（弹出类型选择） | 主命令，弹框选类型 |
-| 转换选中内容为上次使用的 Callout | 不弹框，直接用上次的类型，适合连续标同一种 |
-| 移除选中内容的 Callout 格式 | 还原成普通段落 |
+| Convert selection to callout (pick a type) | Main command; opens the type palette |
+| Convert selection to last used callout | Skips the palette and reuses the previous type — handy for marking several blocks in a row |
+| Remove callout formatting from selection | Restores a plain paragraph |
 
 ---
 
-## 设置
+## Settings
 
-设置 → 第三方插件 → Callout Quick 齿轮图标。
+**Settings → Community plugins → Callout Quick** (gear icon).
 
-**Callout 类型列表** —— 每行一个，决定弹框里有哪些候选：
+**Callout type list** — one entry per line, defines what the palette offers:
 
 ```
 important
-note | 笔记
-tip | 提示
-mystery | 神秘事件
+note | Note
+tip | Tip
+mystery | Mystery
 ```
 
-- 只写类型名 → 自动使用内置中文名（`important` → 重要）
-- 写成 `类型 | 显示名` → 用你写的显示名
-- `#` 开头的行会被当成注释忽略
-- 类型名只能用字母、数字、`-`、`_`
+- Type name only → the built-in display label is used (`important` → Important)
+- `type | Label` → your own display label is used
+- Lines starting with `#` are treated as comments and ignored
+- Type names may contain letters, digits, `-`, and `_` only
 
-**默认折叠状态** —— 生成 `[!type]` / `[!type]-`（默认折叠） / `[!type]+`（默认展开）。
+**Default fold state** — generates `[!type]` (not folded), `[!type]-` (collapsed by default), or `[!type]+` (expanded by default).
 
-**写入标题** —— 开启后会把显示名写进标题：
+**Write title into header** — when enabled, the display label is written into the header:
 
 ```markdown
-> [!important] 重要
-> 内容
+> [!important] Important
+> content
 ```
 
-关闭时用 Obsidian 自带的默认标题（更干净，推荐关闭）。
+When disabled, Obsidian's own default title is used (cleaner, and recommended).
 
 ---
 
-## 常见问题
+## FAQ
 
-**快捷键按了没反应？**
-先确认焦点在笔记编辑区（点了正文），并且打开了「实时预览」或「源码模式」。阅读模式下无法编辑。
+**The hotkey does nothing.**
+Make sure focus is inside the note editor (click the body text) and that you are in **Live Preview** or **Source mode**. Editing is not possible in Reading view.
 
-**弹出的框里没有我要的类型？**
-直接在框里把类型名打出来，回车。或者去设置页把类型加进列表。
+**The type I want is not in the palette.**
+Just type the type name in the palette and press Enter, or add it to the type list in the settings.
 
-**能识别 `[!important]` 这种已经写好的 Callout 吗？**
-能。选中它或者把光标放进去，按快捷键就会让你换类型或移除。
+**Does it recognize callouts I already wrote by hand, like `[!important]`?**
+Yes. Select one or put the cursor inside it and press the hotkey — you will be offered to change or remove the type.
 
 ---
 
-## 文件说明
+## Files
 
-| 文件 | 作用 |
+| File | Purpose |
 | --- | --- |
-| `manifest.json` | 插件元信息（id、名称、版本） |
-| `main.js` | 全部逻辑，CommonJS 格式，无需构建 |
-| `styles.css` | 选择框里小圆点和设置页的样式 |
-| `versions.json` | 发布到社区插件市场时用，本地使用可忽略 |
-| `.gitignore` | 排除 `data.json` 等本地运行时文件 |
-| `LICENSE` | MIT 许可证 |
+| `manifest.json` | Plugin metadata (id, name, version) |
+| `main.js` | All logic, CommonJS format, no build required |
+| `styles.css` | Styles for the palette dots and the settings tab |
+| `versions.json` | Used when publishing to the community directory; safe to ignore for local use |
+| `.gitignore` | Excludes local runtime files such as `data.json` |
+| `LICENSE` | MIT license |
 
-想改成 TypeScript + esbuild 工程，把 `main.js` 逻辑搬到 `main.ts`、去掉 `require('obsidian')` 换成 `import` 即可，其余不变。
+To convert this into a TypeScript + esbuild project, move the `main.js` logic into `main.ts` and replace `require('obsidian')` with `import`. Nothing else needs to change.
 
 ---
 
-## 许可
+## License
 
 [MIT](LICENSE)
-
